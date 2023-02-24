@@ -1,10 +1,14 @@
-import logo from "./logo.svg";
 import "./App.css";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes/Router";
+import "react-photo-view/dist/react-photo-view.css";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <div>
-      <h1>This is App.js</h1>
+      <RouterProvider router={router}></RouterProvider>
+      <Toaster />
     </div>
   );
 }
