@@ -4,7 +4,7 @@ import "./Banner.css";
 
 const Banner = () => {
   return (
-    <div>
+    <div className="">
       <div className=" bg-gradient-to-tr bg-gray-800 to-gray-800">
         <div className="bg-photo">
           <img

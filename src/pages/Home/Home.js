@@ -1,6 +1,8 @@
 import React from "react";
 import { DynamicTitle } from "../../DynamicTitle/DynamicTitle";
 import Banner from "./Banner";
+import Cards from "./Cards";
+import Description from "./Description";
 
 const Home = () => {
   DynamicTitle("Food-Plate");
@@ -9,6 +11,8 @@ const Home = () => {
   return (
     <>
       <Banner />
+      <Cards></Cards>
+      <Description />
 
       {/* <div>
         <img
