@@ -1,10 +1,13 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
-import AddService from "../pages/AddService/AddService";
-import AllServices from "../pages/AllServices/AllServices";
+// import Add from "../pages/AddFoods/AddFoods";
+// import AllServices from "../pages/AllServices/AllServices";
+import AllFoods from "../pages/AllFoods/AllFoods";
+import AddFoods from "../pages/AddFoods/AddFoods";
 import Blogs from "../pages/Blogs/Blogs";
-import DetailsPage from "../pages/DetailsPage/DetailsPage";
+// import DetailsPage from "../pages/DetailsPage/DetailsPage";
+import FoodDetails from "../pages/FoodDetails/FoodDetails";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import MyReviews from "../pages/MyReviews/MyReviews";
@@ -25,18 +28,16 @@ export const router = createBrowserRouter([
           fetch("https://photographer-server-eta.vercel.app/services-home"),
       },
       {
-        path: "/services",
-        element: <AllServices></AllServices>,
+        path: "/all-foods",
+        element: <AllFoods></AllFoods>,
         loader: () =>
           fetch("https://photographer-server-eta.vercel.app/services"),
       },
       {
-        path: "/services/:id",
-        element: <DetailsPage></DetailsPage>,
+        path: "/foods/:id",
+        element: <FoodDetails></FoodDetails>,
         loader: ({ params }) =>
-          fetch(
-            `https://photographer-server-eta.vercel.app/services/${params.id}`
-          ),
+          fetch(`http://localhost:5000/foods/${params.id}`),
       },
       {
         path: "/blogs",
@@ -67,7 +68,7 @@ export const router = createBrowserRouter([
         path: "/add-service",
         element: (
           <PrivateRoute>
-            <AddService></AddService>
+            <AddFoods></AddFoods>
           </PrivateRoute>
         ),
       },

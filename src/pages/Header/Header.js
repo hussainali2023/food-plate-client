@@ -80,7 +80,7 @@ const Header = () => {
                   <Link to={"/"}>Home</Link>
                 </li>
                 <li className=" hover:text-yellow-200">
-                  <Link to={"/services"}>All Services</Link>
+                  <Link to={"/all-foods"}>All Foods</Link>
                 </li>
                 <li className=" hover:text-yellow-200">
                   <Link to={"/blogs"}>Blogs</Link>
@@ -91,7 +91,7 @@ const Header = () => {
                       <Link to={"/my-reviews"}>My Reviews</Link>
                     </li>
                     <li className=" hover:text-yellow-200">
-                      <Link to={"/add-service"}>Add Services</Link>
+                      <Link to={"/add-service"}>Add Foods</Link>
                     </li>
 
                     <button

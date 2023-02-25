@@ -87,6 +87,7 @@ const Cards = () => {
               </p>
               <div className=" flex justify-center">
                 <Link
+                  to={`/foods/${food._id}`}
                   href="/"
                   className="bg-yellow-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 >
@@ -100,7 +101,7 @@ const Cards = () => {
       {/* See all button  */}
       <div className=" flex justify-center mt-6">
         <Link
-          href="/"
+          to={"/all-foods"}
           className="bg-yellow-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           See All
