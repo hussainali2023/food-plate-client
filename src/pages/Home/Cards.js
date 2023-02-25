@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { PhotoProvider, PhotoView } from "react-photo-view";
 import { Link } from "react-router-dom";
 import food1 from "../../assests/bannerPhoto.jpg";
 
@@ -26,18 +27,24 @@ const Cards = () => {
         Here are some Delicious foods
       </p>
       <div className=" grid grid-cols-1 md:grid-cols-3 gap-4 ">
-        {foods.map((food) => (
+        {foods.slice(3, 6).map((food) => (
           <div
             key={food._id}
             className="bg-white rounded-lg shadow-md overflow-hidden"
           >
-            <img
-              src={food.foodPhoto}
-              alt="Example image"
-              className="w-full h-48 object-cover"
-            />
+            <PhotoProvider>
+              <PhotoView src={food.foodPhoto}>
+                <img
+                  src={food.foodPhoto}
+                  alt="Example image"
+                  className="w-full h-48 object-cover"
+                />
+              </PhotoView>
+            </PhotoProvider>
+
             <div className="p-4">
               <h2 className="text-xl font-bold mb-2">{food.foodName}</h2>
+              {/* ------------Fake Rating Stars Starts------------ */}
               <div className="flex mb-2">
                 <svg
                   className="w-4 h-4 fill-current text-yellow-500 mr-1"
@@ -69,8 +76,9 @@ const Cards = () => {
                 >
                   <path d="M10 13.66l-4.18 2.28 1-4.63L1.56 8.84l4.63-.4L10 3.27l2.81 5.17 4.63.4-3.26 2.77 1 4.63z"></path>
                 </svg>
-                <span className="text-gray-600 ml-2">(123)</span>
+                <span className="text-gray-600 ml-2"></span>
               </div>
+              {/* ------------Fake Rating Stars End------------ */}
               <p className="text-lg text-gray-800 font-bold mb-2">
                 ${food.foodPrice}
               </p>
