@@ -7,7 +7,9 @@ const MyReviews = () => {
   const { data: reviews, isLoading } = useQuery({
     queryKey: ["category"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/reviews/${user?.email}`);
+      const res = await fetch(
+        `http://localhost:5000/reviews/user/${user?.email}`
+      );
       const data = await res.json();
       return data;
     },
@@ -17,7 +19,14 @@ const MyReviews = () => {
   }
   return (
     <div className="my-10">
-      {reviews?.length >= 1 ? (
+      {reviews?.length < 1 ? (
+        <>
+          <h1 className=" text-5xl mx-16 my-32 text-center">
+            Sorry you have not given any review. <br />
+            <p className="mt-4">Please Review atleast one Food</p>
+          </h1>
+        </>
+      ) : (
         <>
           <div className=" mx-16">
             {reviews?.map((review) => (
@@ -130,13 +139,6 @@ const MyReviews = () => {
               </div>
             ))}
           </div>
-        </>
-      ) : (
-        <>
-          <h1 className=" text-5xl mx-16 my-32 text-center">
-            Sorry you have not given any review. <br />
-            <p className="mt-4">Please Review atleast one Food</p>
-          </h1>
         </>
       )}
     </div>

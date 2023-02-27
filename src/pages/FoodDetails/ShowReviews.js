@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 // import { Navigate } from "react-router-dom";
 
-const ShowReviews = () => {
+const ShowReviews = ({ food }) => {
   const {
     data: reviews,
     isLoading,
@@ -10,7 +10,9 @@ const ShowReviews = () => {
   } = useQuery({
     queryKey: ["category"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/reviews");
+      const res = await fetch(
+        `http://localhost:5000/reviews/foods/${food?.foodName}`
+      );
       const data = await res.json();
       return data;
     },

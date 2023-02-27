@@ -1,132 +1,133 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+// import ReactStars from "react-rating-stars-component";
+import { useNavigate } from "react-router-dom";
 import { DynamicTitle } from "../../DynamicTitle/DynamicTitle";
 
 const AddService = () => {
   DynamicTitle("Add-Service");
   const [user, setUser] = useState({});
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(user);
+  const {
+    register,
+    formState: { error },
+    handleSubmit,
+  } = useForm();
 
-    fetch("https://photographer-server-eta.vercel.app/services", {
+  const imgbbKey = "17d74797a64a4ed97d0982c31d95c223";
+  const navigate = useNavigate();
+
+  const handleAddFood = (data) => {
+    // console.log(data);
+    const image = data.image[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(user),
+      body: formData,
     })
       .then((res) => res.json())
-      .then((data) => {
-        if (data.acknowledged) {
-          toast.success("User added successfully");
-          event.target.reset();
+      .then((imgData) => {
+        if (imgData.success) {
+          // console.log(imgData);
+
+          const food = {
+            foodDescription: data.foodDescription,
+            foodName: data.foodName,
+            foodPrice: data.foodPrice,
+            foodPhoto: imgData.data.url,
+          };
+          // console.log(phone);
+          fetch("http://localhost:5000/foods", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(food),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              toast.success("New Food Added Successfully");
+              // refetch();
+              navigate("/all-foods");
+            });
         }
       });
   };
 
-  const handleInput = (event) => {
-    const field = event.target.name;
-    const value = event.target.value;
-    const newUser = { ...user };
-    newUser[field] = value;
-    setUser(newUser);
-  };
   return (
-    // <div className=" w-3/4 mx-auto mt-3 mb-8">
-    //   <form
-    //     onSubmit={handleSubmit}
-    //     id="feedbackForm"
-    //     action=""
-    //     method=""
-    //     className=""
-    //   >
-    //     <div className="mb-3">
-    //       <label className="block uppercase text-gray-700 text-xs font-bold mb-2">
-    //         Service Name
-    //       </label>
-    //       <input
-    //         onBlur={handleInput}
-    //         type="text"
-    //         name="serviceName"
-    //         id="serviceName"
-    //         className="border-0 px-3 py-3 rounded text-sm shadow w-3/4
-    //                 bg-gray-300 placeholder-black text-gray-800 outline-none focus:bg-gray-400"
-    //         placeholder=" "
-    //         required
-    //       />
-    //     </div>
-    //     <div className="mb-3">
-    //       <label className="block uppercase text-gray-700 text-xs font-bold mb-2">
-    //         Short Name
-    //       </label>
-    //       <input
-    //         onBlur={handleInput}
-    //         type="text"
-    //         name="shortName"
-    //         id="shortName"
-    //         className="border-0 px-3 py-3 rounded text-sm shadow w-3/4
-    //                 bg-gray-300 placeholder-black text-gray-800 outline-none focus:bg-gray-400"
-    //         placeholder=" "
-    //         required
-    //       />
-    //     </div>
-    //     <div className="mb-3">
-    //       <label className="block uppercase text-gray-700 text-xs font-bold mb-2">
-    //         Photo URL
-    //       </label>
-    //       <input
-    //         onBlur={handleInput}
-    //         type="text"
-    //         name="photo"
-    //         id="photo"
-    //         className="border-0 px-3 py-3 rounded text-sm shadow w-3/4
-    //                 bg-gray-300 placeholder-black text-gray-800 outline-none focus:bg-gray-400"
-    //         placeholder=" "
-    //         required
-    //       />
-    //     </div>
-    //     <div className="mb-3">
-    //       <label className="block uppercase text-gray-700 text-xs font-bold mb-2">
-    //         Price
-    //       </label>
-    //       <input
-    //         onBlur={handleInput}
-    //         type="text"
-    //         name="price"
-    //         id="price"
-    //         className="border-0 px-3 py-3 rounded text-sm shadow w-3/4
-    //                 bg-gray-300 placeholder-black text-gray-800 outline-none focus:bg-gray-400"
-    //         placeholder=" "
-    //         required
-    //       />
-    //     </div>
-    //     <div className="mb-3">
-    //       <label className="block uppercase text-gray-700 text-xs font-bold mb-2">
-    //         Description
-    //       </label>
-    //       <textarea
-    //         onBlur={handleInput}
-    //         name="description"
-    //         id="description"
-    //         className="border-0 px-3 py-3 bg-gray-300 placeholder-black text-gray-800 rounded text-sm shadow focus:outline-none w-3/4"
-    //         placeholder=""
-    //         required
-    //       ></textarea>
-    //     </div>
-    //     <div className="mt-2 flex justify-center">
-    //       <button
-    //         id="feedbackBtn"
-    //         className="bg-yellow-300 text-black text-center mx-auto active:bg-yellow-400 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none"
-    //         type="submit"
-    //       >
-    //         Add Service
-    //       </button>
-    //     </div>
-    //   </form>
-    // </div>
-    <div>This is Add Service</div>
+    <div className=" mx-16 my-10">
+      <div className="  border border-gray-400">
+        <form
+          className=" mx-auto"
+          action=""
+          onSubmit={handleSubmit(handleAddFood)}
+        >
+          <input
+            {...register("foodName")}
+            type="text"
+            className=" mx-10 my-4 px-4 py-2 w-10/12"
+            placeholder="Enter Food Name"
+            required
+          />
+          <input
+            {...register("foodPrice")}
+            type="text"
+            className=" mx-10 my-4 px-4 py-2 w-10/12"
+            placeholder="Enter Food Price"
+            required
+          />
+          <div className=" mx-10 bg-white px-4 py-2 mr-48">
+            <p className="mb-2 text-gray-400">Choose Food Photo</p>
+            <label className="block shadow ">
+              <span className="sr-only cursor-pointer">Choose File</span>
+              <input
+                {...register("image")}
+                type="file"
+                className="block cursor-pointer text-sm text-gray-500 file:py-2 file:px-6 file:rounded file:border-1 file:border-gray-400"
+              />
+            </label>
+          </div>
+          <textarea
+            name="foodDescription"
+            {...register("foodDescription")}
+            id=""
+            cols="70"
+            rows="5"
+            className=" m-10 px-4 py-2 w-10/12"
+            placeholder="Write Food Description"
+            required
+          ></textarea>
+          <div className=" flex justify-center pb-4">
+            {" "}
+            {/* {user?.uid ? ( */}
+            {/* <> */}
+            <button
+              className=" bg-yellow-300 px-6 py-3 text-white font-semibold"
+              type="submit"
+            >
+              Submit
+            </button>
+            {/* </>
+          ) : (
+            <>
+              <div>
+                <button className=" bg-yellow-300 px-6 py-3 text-white font-semibold">
+                  Submit Review
+                </button>
+              </div>
+
+              <div className=" ml-6">
+                {" "}
+                <h1>Please Login to give a review</h1>
+              </div>
+            </>
+          )} */}
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 

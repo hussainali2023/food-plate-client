@@ -74,7 +74,7 @@ const FoodDetails = () => {
         </div>
         <AddComment food={food} />
       </div>
-      <ShowReviews />
+      <ShowReviews food={food} />
     </div>
   );
 };
