@@ -1,8 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+// import { Navigate } from "react-router-dom";
 
 const ShowReviews = () => {
-  const { data: reviews, isLoading } = useQuery({
+  const {
+    data: reviews,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["category"],
     queryFn: async () => {
       const res = await fetch("http://localhost:5000/reviews");
@@ -23,7 +28,7 @@ const ShowReviews = () => {
           class="mb-5 md:mb-7 shadow-lg rounded-t-8xl rounded-b-5xl overflow-hidden"
         >
           <div class="pt-3 pb-3 md:pb-1 px-4 md:px-4 bg-white bg-opacity-40">
-            <div class="flex flex-wrap items-center">
+            <div class=" flex flex-wrap items-center">
               <img
                 class="mr-6"
                 src="uinel-assets/images/ecommerce-reviews/user3.png"
@@ -108,6 +113,10 @@ const ShowReviews = () => {
                   </svg>
                 </a>
               </div>
+              <div class="w-full md:w-px h-2 md:h-8 mx-8 bg-transparent md:bg-gray-200"></div>
+              <h4 class="w-full md:w-auto text-xl font-heading font-medium">
+                {review?.foodName}
+              </h4>
             </div>
           </div>
           <div class="px-4 md:px-16 pt-8 pb-12 bg-white">

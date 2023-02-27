@@ -1,125 +1,144 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const MyReviews = () => {
+  const { user } = useContext(AuthContext);
   const { data: reviews, isLoading } = useQuery({
     queryKey: ["category"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/reviews");
+      const res = await fetch(`http://localhost:5000/reviews/${user?.email}`);
       const data = await res.json();
       return data;
     },
   });
-
+  if (isLoading) {
+    return <p>Loading....</p>;
+  }
   return (
-    <div className=" mx-16">
-      {reviews?.map((review) => (
-        <div
-          key={review._id}
-          class="mb-5 md:mb-7 shadow-lg rounded-t-8xl rounded-b-5xl overflow-hidden"
-        >
-          <div class="pt-3 pb-3 md:pb-1 px-4 md:px-4 bg-white bg-opacity-40">
-            <div class="flex flex-wrap items-center">
-              <img
-                class="mr-6"
-                src="uinel-assets/images/ecommerce-reviews/user3.png"
-                alt=""
-              />
-              <h4 class="w-full md:w-auto text-xl font-heading font-medium">
-                {review?.name}
-              </h4>
-              <div class="w-full md:w-px h-2 md:h-8 mx-8 bg-transparent md:bg-gray-200"></div>
-              <span class="mr-4 text-xl font-heading font-medium">
-                {review?.rating}
-              </span>
-              <div class="flex">
-                <a class="inline-block mr-1" href="#">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewbox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M20 7.91677H12.4167L10 0.416763L7.58333 7.91677H0L6.18335 12.3168L3.81668 19.5834L10 15.0834L16.1834 19.5834L13.8167 12.3168L20 7.91677Z"
-                      fill="#FFCB00"
-                    ></path>
-                  </svg>
-                </a>
-                <a class="inline-block mr-1" href="#">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewbox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M20 7.91677H12.4167L10 0.416763L7.58333 7.91677H0L6.18335 12.3168L3.81668 19.5834L10 15.0834L16.1834 19.5834L13.8167 12.3168L20 7.91677Z"
-                      fill="#FFCB00"
-                    ></path>
-                  </svg>
-                </a>
-                <a class="inline-block mr-1" href="#">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewbox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M20 7.91677H12.4167L10 0.416763L7.58333 7.91677H0L6.18335 12.3168L3.81668 19.5834L10 15.0834L16.1834 19.5834L13.8167 12.3168L20 7.91677Z"
-                      fill="#FFCB00"
-                    ></path>
-                  </svg>
-                </a>
-                <a class="inline-block mr-1" href="#">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewbox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M20 7.91677H12.4167L10 0.416763L7.58333 7.91677H0L6.18335 12.3168L3.81668 19.5834L10 15.0834L16.1834 19.5834L13.8167 12.3168L20 7.91677Z"
-                      fill="#FFCB00"
-                    ></path>
-                  </svg>
-                </a>
-                <a class="inline-block text-gray-200" href="#">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewbox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M20 7.91677H12.4167L10 0.416763L7.58333 7.91677H0L6.18335 12.3168L3.81668 19.5834L10 15.0834L16.1834 19.5834L13.8167 12.3168L20 7.91677Z"
-                      fill="currentColor"
-                    ></path>
-                  </svg>
-                </a>
+    <div className="my-10">
+      {reviews?.length >= 1 ? (
+        <>
+          <div className=" mx-16">
+            {reviews?.map((review) => (
+              <div
+                key={review._id}
+                class="mb-5 md:mb-7 shadow-lg rounded-t-8xl rounded-b-5xl overflow-hidden"
+              >
+                <div class="pt-3 pb-3 md:pb-1 px-4 md:px-4 bg-white bg-opacity-40">
+                  <div class="flex flex-wrap items-center">
+                    <img
+                      class="mr-6"
+                      src="uinel-assets/images/ecommerce-reviews/user3.png"
+                      alt=""
+                    />
+                    <h4 class="w-full md:w-auto text-xl font-heading font-medium">
+                      {review?.name}
+                    </h4>
+                    <div class="w-full md:w-px h-2 md:h-8 mx-8 bg-transparent md:bg-gray-200"></div>
+                    <span class="mr-4 text-xl font-heading font-medium">
+                      {review?.rating}
+                    </span>
+                    <div class="flex">
+                      <a class="inline-block mr-1" href="#">
+                        <svg
+                          width="20"
+                          height="20"
+                          viewbox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M20 7.91677H12.4167L10 0.416763L7.58333 7.91677H0L6.18335 12.3168L3.81668 19.5834L10 15.0834L16.1834 19.5834L13.8167 12.3168L20 7.91677Z"
+                            fill="#FFCB00"
+                          ></path>
+                        </svg>
+                      </a>
+                      <a class="inline-block mr-1" href="#">
+                        <svg
+                          width="20"
+                          height="20"
+                          viewbox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M20 7.91677H12.4167L10 0.416763L7.58333 7.91677H0L6.18335 12.3168L3.81668 19.5834L10 15.0834L16.1834 19.5834L13.8167 12.3168L20 7.91677Z"
+                            fill="#FFCB00"
+                          ></path>
+                        </svg>
+                      </a>
+                      <a class="inline-block mr-1" href="#">
+                        <svg
+                          width="20"
+                          height="20"
+                          viewbox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M20 7.91677H12.4167L10 0.416763L7.58333 7.91677H0L6.18335 12.3168L3.81668 19.5834L10 15.0834L16.1834 19.5834L13.8167 12.3168L20 7.91677Z"
+                            fill="#FFCB00"
+                          ></path>
+                        </svg>
+                      </a>
+                      <a class="inline-block mr-1" href="#">
+                        <svg
+                          width="20"
+                          height="20"
+                          viewbox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M20 7.91677H12.4167L10 0.416763L7.58333 7.91677H0L6.18335 12.3168L3.81668 19.5834L10 15.0834L16.1834 19.5834L13.8167 12.3168L20 7.91677Z"
+                            fill="#FFCB00"
+                          ></path>
+                        </svg>
+                      </a>
+                      <a class="inline-block text-gray-200" href="#">
+                        <svg
+                          width="20"
+                          height="20"
+                          viewbox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M20 7.91677H12.4167L10 0.416763L7.58333 7.91677H0L6.18335 12.3168L3.81668 19.5834L10 15.0834L16.1834 19.5834L13.8167 12.3168L20 7.91677Z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="px-4 md:px-16 pt-8 pb-12 bg-white">
+                  <div class="flex flex-wrap">
+                    <div class="w-full md:w-2/3 mb-6 md:mb-0">
+                      <p class="mb-8 max-w-2xl text-darkBlueGray-400 leading-loose">
+                        {review?.feedback}
+                      </p>
+                    </div>
+                    <div class="w-full md:w-1/3 text-right">
+                      <p class="mb-8 text-sm text-gray-600">
+                        {review?.post_date}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
-          <div class="px-4 md:px-16 pt-8 pb-12 bg-white">
-            <div class="flex flex-wrap">
-              <div class="w-full md:w-2/3 mb-6 md:mb-0">
-                <p class="mb-8 max-w-2xl text-darkBlueGray-400 leading-loose">
-                  {review?.feedback}
-                </p>
-              </div>
-              <div class="w-full md:w-1/3 text-right">
-                <p class="mb-8 text-sm text-gray-600">{review?.post_date}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
+        </>
+      ) : (
+        <>
+          <h1 className=" text-5xl mx-16 my-32 text-center">
+            Sorry you have not given any review. <br />
+            <p className="mt-4">Please Review atleast one Food</p>
+          </h1>
+        </>
+      )}
     </div>
   );
 };
