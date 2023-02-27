@@ -1,9 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+// import { toast } from "react-hot-toast";
 import ReactStars from "react-rating-stars-component";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const AddComment = ({ food }) => {
@@ -55,6 +56,14 @@ const AddComment = ({ food }) => {
   //   const navigate = useNavigate();
 
   const handleAddReview = (data) => {
+    if (rating < 1) {
+      alert("Please give atleast one star rating");
+      return;
+    }
+    if (!user?.uid) {
+      alert("Please Login First to give a review");
+      return;
+    }
     // console.log(data);
     const feedback = {
       feedback: data.reviewMessage,
@@ -65,6 +74,7 @@ const AddComment = ({ food }) => {
       // conditionType: data.conditionType,
       // companyName: data.companyName,
       foodName: food.foodName,
+      name: data.name,
       // photo: imgData.data.url,
       // originalPrice: data.originalPrice,
       // salePrice: data.salePrice,
@@ -72,19 +82,19 @@ const AddComment = ({ food }) => {
       // usage: data.usage,
     };
     // console.log(phone);
-    // fetch("https://purana-phone-server.vercel.app/products", {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(feedback),
-    // })
-    //   .then((res) => res.json())
-    //   .then((result) => {
-    //     toast.success("New Phone Added Successfully");
-    //     refetch();
-    //     navigate("/dashboard/my-product");
-    //   });
+    fetch("http://localhost:5000/reviews", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(feedback),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        toast.success("Your Feedback Successfully Submitted.");
+        // refetch();
+        // navigate("/dashboard/my-product");
+      });
     console.log(feedback);
   };
 
@@ -99,6 +109,13 @@ const AddComment = ({ food }) => {
             activeColor="#ffd700"
           />
         </div>
+        <input
+          {...register("name")}
+          type="text"
+          className=" mx-10 my-4 px-4 py-2 w-10/12"
+          placeholder="Enter your Name"
+          required
+        />
         <textarea
           name="feedback"
           {...register("reviewMessage")}
@@ -107,15 +124,33 @@ const AddComment = ({ food }) => {
           rows="5"
           className=" m-10 px-4 py-2"
           placeholder="Write Your Review"
+          required
         ></textarea>
         <div className=" flex justify-center">
           {" "}
+          {/* {user?.uid ? ( */}
+          {/* <> */}
           <button
             className=" bg-yellow-300 px-6 py-3 text-white font-semibold"
             type="submit"
           >
             Submit Review
           </button>
+          {/* </>
+          ) : (
+            <>
+              <div>
+                <button className=" bg-yellow-300 px-6 py-3 text-white font-semibold">
+                  Submit Review
+                </button>
+              </div>
+
+              <div className=" ml-6">
+                {" "}
+                <h1>Please Login to give a review</h1>
+              </div>
+            </>
+          )} */}
         </div>
       </form>
     </div>

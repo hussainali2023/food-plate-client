@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
         path: "/foods/:id",
         element: <FoodDetails></FoodDetails>,
         loader: ({ params }) =>
-          fetch(`https://food-plate-server.vercel.app/foods/${params.id}`),
+          fetch(`http://localhost:5000/foods/${params.id}`),
       },
       {
         path: "/blogs",

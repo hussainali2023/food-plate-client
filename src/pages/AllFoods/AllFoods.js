@@ -11,7 +11,7 @@ const AllFoods = () => {
   const { data: foods, isLoading } = useQuery({
     queryKey: ["category"],
     queryFn: async () => {
-      const res = await fetch("https://food-plate-server.vercel.app/foods");
+      const res = await fetch("http://localhost:5000/foods");
       const data = await res.json();
       return data;
     },
@@ -30,7 +30,7 @@ const AllFoods = () => {
           Here are some Delicious foods
         </p> */}
         <div className=" grid grid-cols-1 md:grid-cols-3 gap-4 ">
-          {foods.map((food) => (
+          {foods?.map((food) => (
             <div
               key={food._id}
               className="bg-white rounded-lg shadow-md overflow-hidden"
@@ -38,7 +38,7 @@ const AllFoods = () => {
               <PhotoProvider>
                 <PhotoView src={food.foodPhoto}>
                   <img
-                    src={food.foodPhoto}
+                    src={food?.foodPhoto}
                     alt="Example image"
                     className="w-full h-48 object-cover"
                   />
@@ -46,7 +46,7 @@ const AllFoods = () => {
               </PhotoProvider>
 
               <div className="p-4">
-                <h2 className="text-xl font-bold mb-2">{food.foodName}</h2>
+                <h2 className="text-xl font-bold mb-2">{food?.foodName}</h2>
                 {/* ------------Fake Rating Stars Starts------------ */}
                 <div className="flex mb-2">
                   <svg
@@ -83,14 +83,14 @@ const AllFoods = () => {
                 </div>
                 {/* ------------Fake Rating Stars End------------ */}
                 <p className="text-lg text-gray-800 font-bold mb-2">
-                  ${food.foodPrice}
+                  ${food?.foodPrice}
                 </p>
                 <p className="text-gray-600 text-sm mb-4">
-                  {food.foodDescription.slice(0, 100) + "..."}
+                  {food?.foodDescription?.slice(0, 100) + "..."}
                 </p>
                 <div className=" flex justify-center">
                   <Link
-                    to={`/foods/${food._id}`}
+                    to={`/foods/${food?._id}`}
                     href="/"
                     className="bg-yellow-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   >

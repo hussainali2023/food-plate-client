@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
-const MyReviews = () => {
+const ShowReviews = () => {
   const { data: reviews, isLoading } = useQuery({
     queryKey: ["category"],
     queryFn: async () => {
@@ -10,7 +10,11 @@ const MyReviews = () => {
       return data;
     },
   });
-
+  // console.log(reviews);
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+  console.log(reviews);
   return (
     <div className=" mx-16">
       {reviews?.map((review) => (
@@ -124,4 +128,4 @@ const MyReviews = () => {
   );
 };
 
-export default MyReviews;
+export default ShowReviews;
