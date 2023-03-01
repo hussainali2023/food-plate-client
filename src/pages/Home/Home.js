@@ -3,11 +3,13 @@ import { DynamicTitle } from "../../DynamicTitle/DynamicTitle";
 import AmericanFoods from "./AmericanFoods";
 import Banner from "./Banner";
 // import Cards from "./Cards";
-import Description from "./Description";
+// import Description from "./Description";
 import IndianFoods from "./IndianFoods";
 import ItaliyanFoods from "./ItaliyaFoods";
 import "./Home.css";
 import ChineseFoods from "./ChineseFoods";
+import PickOfTheWeek from "./PickOfTheWeek";
+import Dinner from "./Dinner";
 
 const Home = () => {
   DynamicTitle("Food-Plate");
@@ -21,7 +23,9 @@ const Home = () => {
       <ItaliyanFoods />
       <AmericanFoods />
       <ChineseFoods />
-      <Description />
+      <PickOfTheWeek />
+      <Dinner />
+      {/* <Description /> */}
 
       {/* <div>
         <img
