@@ -2,15 +2,15 @@ import React from "react";
 
 const ContactUs = () => {
   return (
-    <div className=" mx-2 md:mx-8 mr-2 px-8 rounded-md mb-12">
+    <div className=" mx-2 md:mx-16 rounded-md mb-12">
       {/* <!-- ====== Contact Section Start --> */}
-      <section className="relative z-10 overflow-hidden bg-emerald-700 py-20 lg:py-[120px]">
+      <section className=" bg-emerald-700 py-20">
         <div>
           <div className=" flex flex-wrap lg:justify-between">
             <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
-              <div className="mx-auto mb-12 max-w-[570px] lg:mb-0">
+              <div className="mx-auto my-auto mb-12 max-w-[570px] lg:mb-0">
                 <span className="text-primary mb-4 block text-base font-semibold"></span>
-                <h2 className="text-dark text-yellow-400 mb-6 text-[32px] font-bold uppercase sm:text-[40px] lg:text-[36px] xl:text-[40px]">
+                <h2 className="text-dark text-center md:text-justify text-yellow-400 mb-6 text-2xl md:text-4xl font-bold">
                   GET IN TOUCH WITH US
                 </h2>
 
