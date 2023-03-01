@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
@@ -8,6 +9,19 @@ import { DynamicTitle } from "../../DynamicTitle/DynamicTitle";
 const AddService = () => {
   DynamicTitle("Add-Service");
   const [user, setUser] = useState({});
+
+  const {
+    data: foods,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["bookings"],
+    queryFn: async () => {
+      const res = await fetch("http://localhost:5000/foods/foodType");
+      const data = await res.json();
+      return data;
+    },
+  });
 
   const {
     register,
@@ -37,6 +51,7 @@ const AddService = () => {
             foodName: data.foodName,
             foodPrice: data.foodPrice,
             foodPhoto: imgData.data.url,
+            foodType: data.foodType,
           };
           // console.log(phone);
           fetch("http://localhost:5000/foods", {
@@ -50,7 +65,7 @@ const AddService = () => {
             .then((result) => {
               toast.success("New Food Added Successfully");
               // refetch();
-              navigate("/all-foods");
+              navigate("/");
             });
         }
       });
@@ -78,6 +93,22 @@ const AddService = () => {
             placeholder="Enter Food Price"
             required
           />
+          <div className="form-group mb-6">
+            <label
+              htmlFor="exampleInputEmail2"
+              className="form-label inline-block mb-2 text-gray-700"
+            >
+              Select Brand Name
+            </label>
+            <br />
+            <select {...register("foodType")} className="w-full py-2 border-2 ">
+              {foods?.map((food, i) => (
+                <option value={food?.foodType} key={i}>
+                  {food?.foodType}
+                </option>
+              ))}
+            </select>
+          </div>{" "}
           <div className=" mx-10 bg-white px-4 py-2 mr-48">
             <p className="mb-2 text-gray-400">Choose Food Photo</p>
             <label className="block shadow ">

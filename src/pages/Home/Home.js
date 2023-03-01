@@ -1,8 +1,11 @@
 import React from "react";
 import { DynamicTitle } from "../../DynamicTitle/DynamicTitle";
+import AmericanFoods from "./AmericanFoods";
 import Banner from "./Banner";
-import Cards from "./Cards";
+// import Cards from "./Cards";
 import Description from "./Description";
+import IndianFoods from "./IndianFoods";
+import ItaliyanFoods from "./ItaliyaFoods";
 
 const Home = () => {
   DynamicTitle("Food-Plate");
@@ -11,7 +14,10 @@ const Home = () => {
   return (
     <>
       <Banner />
-      <Cards></Cards>
+      {/* <Cards></Cards> */}
+      <IndianFoods />
+      <ItaliyanFoods />
+      <AmericanFoods />
       <Description />
 
       {/* <div>

@@ -127,7 +127,7 @@ const Blog = () => {
           </div>
         </div>
       </section> */}
-      This is Blog Section
+      <p className=" text-5xl text-center my-36">Under development</p>
     </div>
   );
 };
