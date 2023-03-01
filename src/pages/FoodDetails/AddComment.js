@@ -20,33 +20,6 @@ const AddComment = ({ food }) => {
     // console.log(newRating);
   };
 
-  //   const result = (form) => {
-  //     form.preventDefault();
-  //     const feedbackWithRating = {
-  //       feedbackMessage: feedback,
-  //       rating: rating,
-  //       email: user.email,
-  //       date: date,
-  //       foodName: food.foodName,
-  //     };
-  //     console.log(feedbackWithRating);
-  //   };
-
-  //   const handleInput = (e) => {
-  //     e.preventDefault();
-  //     const feedbackMessage = e.target.value;
-  //     setFeedback(feedbackMessage);
-  //     // console.log(feedbackMessage);
-  //   };
-  //   const { isLoading, refetch } = useQuery({
-  //     queryKey: [""],
-  //     queryFn: async () => {
-  //       const res = await fetch("");
-  //       const data = await res.json();
-  //       return data;
-  //     },
-  //   });
-
   const {
     register,
     formState: { error },
@@ -82,7 +55,7 @@ const AddComment = ({ food }) => {
       // usage: data.usage,
     };
     // console.log(phone);
-    fetch("http://localhost:5000/reviews", {
+    fetch("https://food-plate-server-hussainali2023.vercel.app/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",

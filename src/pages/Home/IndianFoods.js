@@ -1,30 +1,42 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { Link } from "react-router-dom";
+import { Divider, Placeholder } from "rsuite";
 // import food1 from "../../assests/bannerPhoto.jpg";
 
 const IndianFoods = () => {
-  const { data: indianFoods, isLoading } = useQuery({
-    queryKey: ["category"],
-    queryFn: async () => {
-      const res = await fetch("http://localhost:5000/foods/indian");
-      const data = await res.json();
-      return data;
-    },
-  });
-  // console.log(categories);
-  if (isLoading) {
-    return <p>Loading....</p>;
-  }
+  const [indianFoods, setIndianFoods] = useState();
+  useEffect(() => {
+    fetch("https://food-plate-server-hussainali2023.vercel.app/foods/indian")
+      .then((res) => res.json())
+      .then((data) => setIndianFoods(data));
+  }, []);
+
+  // const { data: indianFoods, isLoading } = useQuery({
+  //   queryKey: ["category"],
+  //   queryFn: async () => {
+  //     const res = await fetch(
+  //       "https://food-plate-server-hussainali2023.vercel.app/foods/indian"
+  //     );
+  //     const data = await res.json();
+  //     return data;
+  //   },
+  // });
+  // // console.log(categories);
+  // if (isLoading) {
+  //   return <p>Loading....</p>;
+  // }
 
   // console.log(foods);
 
   return (
-    <div className="lg:mx-16 mx-2 mt-4 md:mt-8">
-      <p className=" text-4xl font-bold text-emerald-800 mb-6 md:mb-9">
+    <div className="lg:mx-16 mx-2 mt-14 md:mt-20">
+      <p className=" text-2xl md:text-4xl font-bold text-emerald-800 mb-6 md:mb-9">
         {" "}
-        Indian Foods
+        <p className="indian">
+          <span className="indianText">Indian Foods</span>
+        </p>
       </p>
       <div className=" grid grid-cols-1 md:grid-cols-3 gap-4 ">
         {indianFoods?.map(
@@ -46,7 +58,9 @@ const IndianFoods = () => {
               </PhotoProvider>
 
               <div className="p-4">
-                <h2 className="text-xl font-bold mb-2">{food?.foodName}</h2>
+                <h2 className=" text-lg md:text-xl font-bold mb-2">
+                  {food?.foodName}
+                </h2>
                 {/* ------------Fake Rating Stars Starts------------ */}
                 <div className="flex mb-2">
                   <svg

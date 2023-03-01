@@ -40,7 +40,7 @@ const AddService = () => {
             foodType: data.foodType,
           };
           // console.log(phone);
-          fetch("http://localhost:5000/foods", {
+          fetch("https://food-plate-server-hussainali2023.vercel.app/foods", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -51,7 +51,7 @@ const AddService = () => {
             .then((result) => {
               toast.success("New Food Added Successfully");
               // refetch();
-              navigate("/all-foods");
+              navigate("/");
             });
         }
       });

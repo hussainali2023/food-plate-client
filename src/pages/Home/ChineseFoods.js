@@ -1,15 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { Link } from "react-router-dom";
-import food1 from "../../assests/bannerPhoto.jpg";
 
-const ItaliyanFoods = () => {
-  const [italianFoods, setItalianFoods] = useState();
+const ChineseFoods = () => {
+  const [chineseFoods, setChineseFoods] = useState();
   useEffect(() => {
-    fetch("https://food-plate-server-hussainali2023.vercel.app/foods/italian")
+    fetch("https://food-plate-server-hussainali2023.vercel.app/foods/chinese")
       .then((res) => res.json())
-      .then((data) => setItalianFoods(data));
+      .then((data) => setChineseFoods(data));
   }, []);
 
   return (
@@ -17,11 +15,11 @@ const ItaliyanFoods = () => {
       <p className=" text-xl md:text-4xl font-bold text-emerald-700 mb-6 md:mb-9">
         {" "}
         <p className="indian">
-          <span>Italian Foods</span>
+          <span>Chinese Foods</span>
         </p>
       </p>
       <div className=" grid grid-cols-1 md:grid-cols-3 gap-4 ">
-        {italianFoods?.map(
+        {chineseFoods?.map(
           (
             food //.slice(3, 6)
           ) => (
@@ -85,7 +83,6 @@ const ItaliyanFoods = () => {
                   {food?.foodDescription?.slice(0, 100) + "..."}
                 </p>
                 <div className="card-body">
-                  {/* <h2 className="card-title text-center">{category.companyName}</h2> */}
                   <div className="justify-center mt-4">
                     <Link to={`/foods/${food?._id}`}>
                       <button className=" btn bg-emerald-700 hover:bg-white hover:text-emerald-700 hover:font-medium  py-2 border-2 border-emerald-700 rounded-3xl text-white w-full">
@@ -93,30 +90,14 @@ const ItaliyanFoods = () => {
                       </button>
                     </Link>
                   </div>
-                  {/* </div>
-                <div className=" flex justify-center"> */}
-                  {/* <Link to={`/foods/${food?._id}`} href="/">
-                    <button className=" btn bg-emerald-700 hover:bg-white hover:text-emerald-700 hover:font-medium  py-2 border-2 border-emerald-700 rounded-3xl text-white w-full">
-                      Details
-                    </button>
-                  </Link> */}
                 </div>
               </div>
             </div>
           )
         )}
       </div>
-      {/* See all button  */}
-      {/* <div className=" flex justify-center mt-6">
-        <Link
-          to={"/all-foods"}
-          className="bg-yellow-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          See All
-        </Link>
-      </div> */}
     </div>
   );
 };
 
-export default ItaliyanFoods;
+export default ChineseFoods;

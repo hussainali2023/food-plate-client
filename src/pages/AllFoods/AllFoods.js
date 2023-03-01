@@ -11,7 +11,9 @@ const AllFoods = () => {
   const { data: foods, isLoading } = useQuery({
     queryKey: ["category"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/foods");
+      const res = await fetch(
+        "https://food-plate-server-hussainali2023.vercel.app/foods"
+      );
       const data = await res.json();
       return data;
     },

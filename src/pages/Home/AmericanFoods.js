@@ -5,34 +5,20 @@ import { Link } from "react-router-dom";
 import food1 from "../../assests/bannerPhoto.jpg";
 
 const AmericanFoods = () => {
-  // const { data: americanFoods, isLoading } = useQuery({
-  //   queryKey: ["category"],
-  //   queryFn: async () => {
-  //     const res = await fetch("http://localhost:5000/foods/american");
-  //     const data = await res.json();
-  //     return data;
-  //   },
-  // });
-  // // console.log(categories);
-  // if (isLoading) {
-  //   return <p>Loading....</p>;
-  // }
-
-  // // console.log(foods);
-  // console.log(americanFoods);
-
   const [americanFoods, setAmericanFoods] = useState();
   useEffect(() => {
-    fetch("http://localhost:5000/foods/american")
+    fetch("https://food-plate-server-hussainali2023.vercel.app/foods/american")
       .then((res) => res.json())
       .then((data) => setAmericanFoods(data));
   }, []);
 
   return (
-    <div className="lg:mx-16 mx-2 mt-4 md:mt-8">
-      <p className=" text-4xl font-bold text-emerald-700 mb-6 md:mb-9">
+    <div className="lg:mx-16 mx-2 mt-10 md:mt-20">
+      <p className=" text-xl md:text-4xl font-bold text-emerald-700 mb-6 md:mb-9">
         {" "}
-        American Foods
+        <p className="indian">
+          <span>American Foods</span>
+        </p>
       </p>
       <div className=" grid grid-cols-1 md:grid-cols-3 gap-4 ">
         {americanFoods?.map(
@@ -54,7 +40,7 @@ const AmericanFoods = () => {
               </PhotoProvider>
 
               <div className="p-4">
-                <h2 className="text-xl font-bold mb-2">
+                <h2 className=" text-lg md:text-xl font-bold mb-2">
                   {americanFood?.foodName}
                 </h2>
                 {/* ------------Fake Rating Stars Starts------------ */}

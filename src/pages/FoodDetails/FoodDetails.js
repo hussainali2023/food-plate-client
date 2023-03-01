@@ -10,7 +10,7 @@ const FoodDetails = () => {
   // console.log("ki je hocche eisob");
   return (
     <div>
-      <div className=" lg:mx-16 mx-2 mt-4 md:mt-8 mb-6 md:mb-10 grid grid-cols-2 gap-10">
+      <div className=" lg:mx-16 mx-2 mt-4 md:mt-8 mb-6 md:mb-10 grid-cols-1 grid md:grid-cols-2 gap-2 md:gap-10">
         <div>
           {/* <p className=" text-center text-4xl font-bold text-yellow-600 mb-6 md:mb-9">
           {" "}

@@ -11,7 +11,7 @@ const ShowReviews = ({ food }) => {
     queryKey: ["category"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/reviews/foods/${food?.foodName}`
+        `https://food-plate-server-hussainali2023.vercel.app/reviews/foods/${food?.foodName}`
       );
       const data = await res.json();
       return data;
@@ -23,11 +23,11 @@ const ShowReviews = ({ food }) => {
   }
   console.log(reviews);
   return (
-    <div className=" mx-16">
+    <div className=" mx-2 lg:mx-16">
       {reviews?.map((review) => (
         <div
           key={review._id}
-          class="mb-5 md:mb-7 shadow-lg rounded-t-8xl rounded-b-5xl overflow-hidden"
+          class="mb-5 md:mb-7 shadow-lg rounded-t-xl lg:rounded-t-8xl lg:rounded-b-5xl rounded-b-xl overflow-hidden"
         >
           <div class="pt-3 pb-3 md:pb-1 px-4 md:px-4 bg-white bg-opacity-40">
             <div class=" flex flex-wrap items-center">
@@ -44,7 +44,7 @@ const ShowReviews = ({ food }) => {
                 {review?.rating}
               </span>
               <div class="flex">
-                <a class="inline-block mr-1" href="#">
+                <a class="inline-block mr-1" href=" ">
                   <svg
                     width="20"
                     height="20"
@@ -58,7 +58,7 @@ const ShowReviews = ({ food }) => {
                     ></path>
                   </svg>
                 </a>
-                <a class="inline-block mr-1" href="#">
+                <a class="inline-block mr-1" href=" ">
                   <svg
                     width="20"
                     height="20"

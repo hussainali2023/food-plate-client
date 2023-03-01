@@ -13,7 +13,7 @@ import Login from "../pages/Login/Login";
 import MyReviews from "../pages/MyReviews/MyReviews";
 import Review from "../pages/Review/Review";
 import SignUp from "../pages/SignUp/SignUp";
-import UpdateReview from "../pages/UpdateReview/UpdateReview";
+// import UpdateReview from "../pages/UpdateReview/UpdateReview";
 import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
@@ -35,7 +35,9 @@ export const router = createBrowserRouter([
         path: "/foods/:id",
         element: <FoodDetails></FoodDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/foods/${params.id}`),
+          fetch(
+            `https://food-plate-server-hussainali2023.vercel.app/foods/${params.id}`
+          ),
       },
       {
         path: "/blogs",
@@ -70,16 +72,16 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "/update",
-        element: (
-          <PrivateRoute>
-            <UpdateReview></UpdateReview>
-          </PrivateRoute>
-        ),
-        loader: () =>
-          fetch("https://photographer-server-eta.vercel.app/reviews"),
-      },
+      // {
+      //   path: "/update",
+      //   element: (
+      //     <PrivateRoute>
+      //       <UpdateReview></UpdateReview>
+      //     </PrivateRoute>
+      //   ),
+      //   loader: () =>
+      //     fetch("https://photographer-server-eta.vercel.app/reviews"),
+      // },
     ],
   },
 ]);

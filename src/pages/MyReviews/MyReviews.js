@@ -8,7 +8,7 @@ const MyReviews = () => {
     queryKey: ["category"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/reviews/user/${user?.email}`
+        `https://food-plate-server-hussainali2023.vercel.app/reviews/user/${user?.email}`
       );
       const data = await res.json();
       return data;
@@ -21,14 +21,14 @@ const MyReviews = () => {
     <div className="my-10">
       {reviews?.length < 1 ? (
         <>
-          <h1 className=" text-5xl mx-16 my-32 text-center">
+          <h1 className=" text-2xl md:text-5xl mx-2 my-10 md:mx-16 md:my-32 text-center">
             Sorry you have not given any review. <br />
             <p className="mt-4">Please Review atleast one Food</p>
           </h1>
         </>
       ) : (
         <>
-          <div className=" mx-16">
+          <div className=" mx-4 md:mx-16">
             {reviews?.map((review) => (
               <div
                 key={review._id}

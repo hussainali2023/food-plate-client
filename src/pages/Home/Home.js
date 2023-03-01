@@ -6,6 +6,8 @@ import Banner from "./Banner";
 import Description from "./Description";
 import IndianFoods from "./IndianFoods";
 import ItaliyanFoods from "./ItaliyaFoods";
+import "./Home.css";
+import ChineseFoods from "./ChineseFoods";
 
 const Home = () => {
   DynamicTitle("Food-Plate");
@@ -18,6 +20,7 @@ const Home = () => {
       <IndianFoods />
       <ItaliyanFoods />
       <AmericanFoods />
+      <ChineseFoods />
       <Description />
 
       {/* <div>
