@@ -22,7 +22,7 @@ const IndianFoods = () => {
 
   return (
     <div className="lg:mx-16 mx-2 mt-4 md:mt-8">
-      <p className=" text-4xl font-bold text-yellow-600 mb-6 md:mb-9">
+      <p className=" text-4xl font-bold text-emerald-800 mb-6 md:mb-9">
         {" "}
         Indian Foods
       </p>
@@ -88,15 +88,25 @@ const IndianFoods = () => {
                 <p className="text-gray-600 text-sm mb-4">
                   {food?.foodDescription?.slice(0, 100) + "..."}
                 </p>
-                <div className=" flex justify-center">
+                <div className="card-body">
+                  {/* <h2 className="card-title text-center">{category.companyName}</h2> */}
+                  <div className="justify-center mt-4">
+                    <Link to={`/foods/${food?._id}`}>
+                      <button className=" btn bg-emerald-700 hover:bg-white hover:text-emerald-700 hover:font-medium  py-2 border-2 border-emerald-700 rounded-3xl text-white w-full">
+                        Details
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+                {/* <div className=" flex justify-center">
                   <Link
                     to={`/foods/${food?._id}`}
                     href="/"
-                    className="bg-yellow-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    className=" bg-emerald-800 btn hover:bg-yellow-400 border-0 text-white w-full"
                   >
                     Details
                   </Link>
-                </div>
+                </div> */}
               </div>
             </div>
           )

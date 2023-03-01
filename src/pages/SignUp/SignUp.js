@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
@@ -9,25 +10,26 @@ const SignUp = () => {
   DynamicTitle("SignUp");
   const { createUser } = useContext(AuthContext);
 
+  const {
+    register,
+    formState: { error },
+    handleSubmit,
+  } = useForm();
   const navigate = useNavigate();
+
+  // const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const password = form.password.value;
+  const handleSignup = (e) => {
     // console.log(name, email, password);
 
-    createUser(email, password)
+    createUser(e.email, e.password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         // console.log(user);
         toast.success("Congratulations You are successfully Registered");
-        form.reset();
         navigate(from, { replace: true });
         // ...
       })
@@ -40,66 +42,83 @@ const SignUp = () => {
       });
   };
   return (
-    <div className=" flex justify-center">
-      <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100">
-        <h1 className="text-2xl font-bold text-center">Sign Up</h1>
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-6 ng-untouched ng-pristine ng-valid"
-        >
-          <div className="space-y-1 text-sm">
-            <label htmlFor="name" className="block dark:text-gray-400">
-              Name <span className="text-red-600">*</span>
-            </label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Enter your name"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
-              required
-            />
+    <div>
+      <section>
+        <div className="container px-6 py-12 h-full">
+          <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
+            <div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
+              <img
+                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                className="w-full"
+                alt="/"
+              />
+            </div>
+            <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
+              <h1 className=" text-center text-emerald-700 font-bold text-3xl mb-6">
+                Please Register
+              </h1>
+              <form onSubmit={handleSubmit(handleSignup)}>
+                <div className="mb-4">
+                  <label
+                    className=" flex justify-start text-lg mb-2"
+                    htmlFor="name"
+                  >
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    {...register("name", { required: "Name is Required" })}
+                    className="form-control block w-full px-4 py-2 text-lg font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="Your Name"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label
+                    className=" flex justify-start text-lg mb-2"
+                    htmlFor="email"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    {...register("email", {
+                      required: "Email Address is required",
+                    })}
+                    className="form-control block w-full px-4 py-2 text-lg font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="Email address"
+                  />
+                </div>
+                <div className="mb-6">
+                  <label
+                    className=" flex justify-start text-lg mb-2"
+                    htmlFor="password"
+                  >
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    {...register("password")}
+                    className="form-control block w-full px-4 py-2 text-lg font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="Password"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="inline-block px-7 py-3 bg-emerald-700 border-2 border-emerald-700 hover:bg-gray-100 text-white hover:text-emerald-700 font-medium text-sm leading-snug uppercase rounded shadow-md  transition duration-150 ease-in-out w-full"
+                >
+                  Sign Up
+                </button>
+              </form>
+              <p className="mt-2">
+                Already Have an Account?{" "}
+                <Link to="/login" className=" text-blue-700 font-medium">
+                  Sign In
+                </Link>
+              </p>
+            </div>
           </div>
-          <div className="space-y-1 text-sm">
-            <label htmlFor="email" className="block dark:text-gray-400">
-              Email <span className="text-red-600">*</span>
-            </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Enter Email Address"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
-              required
-            />
-          </div>
-          <div className="space-y-1 text-sm">
-            <label htmlFor="password" className="block dark:text-gray-400">
-              Password <span className="text-red-600">*</span>
-            </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Enter Password"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400"
-          >
-            Sign Up
-          </button>
-        </form>
-        <p className="text-xs text-center sm:px-6 dark:text-gray-400">
-          Already Have an account?
-          <Link to={"/login"} className="underline dark:text-gray-100">
-            Sign In
-          </Link>
-        </p>
-      </div>
+        </div>
+      </section>
     </div>
   );
 };

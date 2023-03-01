@@ -30,7 +30,7 @@ const AmericanFoods = () => {
 
   return (
     <div className="lg:mx-16 mx-2 mt-4 md:mt-8">
-      <p className=" text-4xl font-bold text-yellow-600 mb-6 md:mb-9">
+      <p className=" text-4xl font-bold text-emerald-700 mb-6 md:mb-9">
         {" "}
         American Foods
       </p>
@@ -98,7 +98,17 @@ const AmericanFoods = () => {
                 <p className="text-gray-600 text-sm mb-4">
                   {americanFood?.foodDescription?.slice(0, 100) + "..."}
                 </p>
-                <div className=" flex justify-center">
+                <div className="card-body">
+                  {/* <h2 className="card-title text-center">{category.companyName}</h2> */}
+                  <div className="justify-center mt-4">
+                    <Link to={`/foods/${americanFood?._id}`}>
+                      <button className=" btn bg-emerald-700 hover:bg-white hover:text-emerald-700 hover:font-medium  py-2 border-2 border-emerald-700 rounded-3xl text-white w-full">
+                        Details
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+                {/* <div className=" flex justify-center">
                   <Link
                     to={`/foods/${americanFood?._id}`}
                     href="/"
@@ -106,7 +116,7 @@ const AmericanFoods = () => {
                   >
                     Details
                   </Link>
-                </div>
+                </div> */}
               </div>
             </div>
           )

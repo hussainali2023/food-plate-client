@@ -24,15 +24,13 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () =>
-          fetch("https://photographer-server-eta.vercel.app/services-home"),
       },
-      {
-        path: "/all-foods",
-        element: <AllFoods></AllFoods>,
-        loader: () =>
-          fetch("https://photographer-server-eta.vercel.app/services"),
-      },
+      // {
+      //   path: "/all-foods",
+      //   element: <AllFoods></AllFoods>,
+      //   loader: () =>
+      //     fetch("https://photographer-server-eta.vercel.app/services"),
+      // },
       {
         path: "/foods/:id",
         element: <FoodDetails></FoodDetails>,

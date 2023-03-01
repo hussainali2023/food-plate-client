@@ -24,7 +24,7 @@ const Header = () => {
 
   return (
     <div>
-      <nav className="w-full bg-green-800 text-white shadow">
+      <nav className="w-full bg-emerald-700 text-white shadow">
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
@@ -79,24 +79,24 @@ const Header = () => {
                 <li className=" hover:text-yellow-200">
                   <Link to={"/"}>Home</Link>
                 </li>
-                <li className=" hover:text-yellow-200">
+                {/* <li className=" hover:text-yellow-200">
                   <Link to={"/all-foods"}>All Foods</Link>
-                </li>
+                </li> */}
                 <li className=" hover:text-yellow-200">
                   <Link to={"/blogs"}>Blogs</Link>
                 </li>
+
+                <li className=" hover:text-yellow-200">
+                  <Link to={"/my-reviews"}>My Reviews</Link>
+                </li>
+                <li className=" hover:text-yellow-200">
+                  <Link to={"/add-service"}>Add Foods</Link>
+                </li>
                 {user?.uid ? (
                   <>
-                    <li className=" hover:text-yellow-200">
-                      <Link to={"/my-reviews"}>My Reviews</Link>
-                    </li>
-                    <li className=" hover:text-yellow-200">
-                      <Link to={"/add-service"}>Add Foods</Link>
-                    </li>
-
                     <button
                       onClick={handleLogOut}
-                      className=" bg-violet-400 px-6 py-2 text-white font-semibold rounded-md"
+                      className=" bg-amber-400 hover:bg-emerald-700 border-2 border-amber-400 px-6 py-2 text-white font-semibold rounded-md"
                     >
                       Logout
                     </button>
@@ -104,7 +104,7 @@ const Header = () => {
                 ) : (
                   <li className="text-gray-600 hover:text-blue-600">
                     <Link to={"/login"}>
-                      <button className=" bg-yellow-400 hover:bg-yellow-300 px-6 py-2 text-white font-semibold rounded-md">
+                      <button className=" bg-amber-500 hover:bg-emerald-700 border-2 border-amber-500 px-6 py-2 text-white font-semibold rounded-md">
                         Login
                       </button>
                     </Link>

@@ -131,7 +131,7 @@ const AddComment = ({ food }) => {
           {/* {user?.uid ? ( */}
           {/* <> */}
           <button
-            className=" bg-yellow-300 px-6 py-3 text-white font-semibold"
+            className=" bg-emerald-700 rounded-3xl border-2 border-emerald-700 hover:text-emerald-700 hover:bg-gray-100 px-6 py-3 text-white font-semibold"
             type="submit"
           >
             Submit Review
