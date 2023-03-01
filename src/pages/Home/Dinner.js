@@ -3,7 +3,7 @@ import dinner from "../../assests/dinner.jpg";
 
 const Dinner = () => {
   return (
-    <div className=" mt-10 mx-2 md:mt-20 md:mx-16 rounded-md grid grid-cols-1">
+    <div className=" mb-4 md:mb-10 mt-10 mx-2 md:mt-20 md:mx-16 rounded-md grid grid-cols-1">
       <div>
         <img src={dinner} alt="" />
       </div>
