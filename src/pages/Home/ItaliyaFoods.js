@@ -3,13 +3,18 @@ import React, { useEffect, useState } from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { Link } from "react-router-dom";
 import food1 from "../../assests/bannerPhoto.jpg";
-
+import Aos from "aos";
+import "aos/dist/aos.css";
 const ItaliyanFoods = () => {
   const [italianFoods, setItalianFoods] = useState();
   useEffect(() => {
     fetch("https://food-plate-server-hussainali2023.vercel.app/foods/italian")
       .then((res) => res.json())
       .then((data) => setItalianFoods(data));
+  }, []);
+
+  useEffect(() => {
+    Aos.init();
   }, []);
 
   return (
@@ -26,6 +31,7 @@ const ItaliyanFoods = () => {
             food //.slice(3, 6)
           ) => (
             <div
+              data-aos="zoom-in-up"
               key={food?._id}
               className="bg-white rounded-lg shadow-md overflow-hidden"
             >

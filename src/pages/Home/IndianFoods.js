@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { Link } from "react-router-dom";
 import { Divider, Placeholder } from "rsuite";
-// import food1 from "../../assests/bannerPhoto.jpg";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const IndianFoods = () => {
   const [indianFoods, setIndianFoods] = useState();
@@ -13,25 +14,12 @@ const IndianFoods = () => {
       .then((data) => setIndianFoods(data));
   }, []);
 
-  // const { data: indianFoods, isLoading } = useQuery({
-  //   queryKey: ["category"],
-  //   queryFn: async () => {
-  //     const res = await fetch(
-  //       "https://food-plate-server-hussainali2023.vercel.app/foods/indian"
-  //     );
-  //     const data = await res.json();
-  //     return data;
-  //   },
-  // });
-  // // console.log(categories);
-  // if (isLoading) {
-  //   return <p>Loading....</p>;
-  // }
-
-  // console.log(foods);
+  useEffect(() => {
+    Aos.init();
+  }, []);
 
   return (
-    <div className="lg:mx-16 mx-2 mt-14 md:mt-20">
+    <div className="lg:mx-16 mx-2 mt-14 md:mt-20" data-aos="zoom-in">
       <p className=" text-2xl md:text-4xl font-bold text-emerald-800 mb-6 md:mb-9">
         {" "}
         <p className="indian">
@@ -44,6 +32,7 @@ const IndianFoods = () => {
             food //.slice(3, 6)
           ) => (
             <div
+              data-aos="flip-left"
               key={food?._id}
               className="bg-white rounded-lg shadow-md overflow-hidden"
             >

@@ -29,7 +29,7 @@ const Blog = () => {
               alt=""
               className=" w-12 h-12 rounded-full mr-3"
             />
-            <div>
+            <div className="">
               {/* --------Author Name------------  */}
               <li className=" list-none">Minzinia Mellina</li>
               <li className="list-none">01/03/2023</li>
